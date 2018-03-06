@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>v-on</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>HelloWord</h1>
+    <hr>
+    <div id="app">
+        <h1>v-on 事件监听器</h1>
+        <hr> 本场比赛得分：{{count}}
+        <button v-on:click="add">加分</button>
+        <button v-on:click="minus">减分</button>
+        <hr>
+        <input type="number" v-on:keyup.enter="onEnter" v-model="secondCount">
+    </div>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: "#app",
+            data: {
+                count: 1,
+                secondCount:2
+            },
+            methods:{
+                add:function () {  
+                    var self =this;
+                    self.count++;
+                },
+                minus:function () {  
+                    var self =this;
+                    self.count--;
+                },
+                onEnter:function(){
+                    this.count=this.count+parseInt(this.secondCount);
+                }
+            }
+        })
+    </script>
+</body>
+
+</html>

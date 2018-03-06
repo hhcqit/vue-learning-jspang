@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue.directive 自定义指令</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>Vue.directive 自定义指令</h1>
+    <hr>
+    <div id="app">
+        <div v-jspang="color" id="demo">
+            {{num}}
+        </div>
+        <div>
+            <button @click="add">Add</button>
+        </div>
+        <div>
+            <p>自动聚焦 autofocus 在移动版 Safari 上不工作</p>
+            <!-- <input autofocus type="text"> -->
+            <input v-focus >
+        </div>
+    </div>
+    <div>
+        <button onclick="unbind()">解绑</button>
+    </div>
+    <script type="text/javascript">
+        function unbind() {
+            app.$destroy;
+        }
+        // var myDirective = Vue.directive('jspang', function (el, binding, vnode) {
+        //     el.style = 'color:' + binding.value;
+        //     // el.style.color = binding.value;
+        //     console.log(binding)
+        // })
+        Vue.directive('focus', {
+            // 当被绑定的元素插入到 DOM 中时……
+            inserted: function (el) {
+                // 聚焦元素
+                el.focus()
+            }
+        })
+        var myDirective = Vue.directive('jspang', {
+            bind: function (el, binding, vnode) { //被绑定
+                console.log('1 - bind');
+                el.style = 'color:' + binding.value;
+                console.log(binding.name);
+                console.log(binding.value);
+                console.log(binding.expression);
+                console.log(binding.arg);
+            },
+            inserted: function (el, binding, vnode) { //绑定到节点
+                console.log('2 - inserted');
+                // el.style = 'color:' + binding.value;
+            },
+            update: function (el, binding, vnode) { //组件更新
+                console.log('3 - update');
+            },
+            componentUpdated: function (el, binding, vnode) { //组件更新完成
+                console.log('4 - componentUpdated');
+               
+            },
+            unbind: function (el, binding, vnode) { //解绑
+                console.log('5 - unbind');
+            }
+        })
+        var app = new Vue({
+            el: "#app",
+            data: {
+                num: 10,
+                color: 'green'
+            },
+            methods: {
+                add: function () {
+                    var self = this;
+                    self.num++;
+                }
+
+            }
+        })
+    </script>
+</body>
+
+</html>
