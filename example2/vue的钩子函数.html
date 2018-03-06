@@ -13,14 +13,65 @@
     <h1>Vue.的生命周期</h1>
     <hr>
     <div id="app">
-       {{count}}
+        {{count}}
+        <button @click="add()">add</button>
+        <div style="position:fixed;top:0;bottom:0;left:0;right:0;background:#fff;" v-show="loading">
+            <img src="../assets/images/1392662516435_1140x0.gif" alt="" style="position:absolute;top:50%;left:50%;margin-left:-200px;margin-top:-150px">
+        </div>
     </div>
+
+    <button onclick="app.$destroy()">xiaohui</button>
+    <button onclick="unbind()">unbind</button>
     <script type="text/javascript">
+        function unbind() {
+            app.$destroy();
+        }
         var app = new Vue({
-            el:'#app',
-            data:{
-                count:1
+            el: '#app',
+            data: {
+                count: 1,
+                loading: true
+            },
+            methods: {
+                add: function () {
+                    this.count++;
+                }
+            },
+            beforeCreate: function () {
+                console.log('1-beforeCreate 初始化之后');
+            },
+            created: function () {
+                console.log('2-created 创建完成');
+            },
+            beforeMount: function () {
+                console.log('3-beforeMount 挂载之前');
+            },
+            mounted: function () {
+                console.log('4-mounted 被创建');
+                var self=this;
+                setTimeout(function(){
+                    self.loading = false;
+                },1000)
+            },
+            beforeUpdate: function () {
+                console.log('5-beforeUpdate 数据更新前');
+            },
+            updated: function () {
+                console.log('6-updated 被更新后');
+            },
+            activated: function () {
+                console.log('7-activated');
+            },
+            deactivated: function () {
+                console.log('8-deactivated');
+            },
+            beforeDestroy: function () {
+                console.log('9-beforeDestroy 销毁之前');
+            },
+            destroyed: function () {
+                console.log('10-destroyed 销毁之后')
             }
+
         })
     </script>
 </body>

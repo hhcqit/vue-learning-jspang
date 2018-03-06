@@ -24,13 +24,14 @@
             <!-- <input autofocus type="text"> -->
             <input v-focus >
         </div>
+        
     </div>
     <div>
         <button onclick="unbind()">解绑</button>
     </div>
     <script type="text/javascript">
         function unbind() {
-            app.$destroy;
+            app.$destroy();
         }
         // var myDirective = Vue.directive('jspang', function (el, binding, vnode) {
         //     el.style = 'color:' + binding.value;
@@ -51,7 +52,6 @@
                 console.log(binding.name);
                 console.log(binding.value);
                 console.log(binding.expression);
-                console.log(binding.arg);
             },
             inserted: function (el, binding, vnode) { //绑定到节点
                 console.log('2 - inserted');
