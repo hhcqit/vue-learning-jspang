@@ -18,7 +18,7 @@
         <button v-on:click="add">加分</button>
         <button v-on:click="minus">减分</button>
         <hr>
-        <input type="number" v-on:keyup.enter="onEnter" v-model="secondCount">
+        <input type="number" v-on:keyup.enter="onEnter"  v-on:keyup.delete="onDelete" v-model="secondCount">
     </div>
     <script type="text/javascript">
         var app = new Vue({
@@ -38,6 +38,9 @@
                 },
                 onEnter:function(){
                     this.count=this.count+parseInt(this.secondCount);
+                },
+                onDelete:function(){
+                    console.log('监听输入框删除事件')
                 }
             }
         })

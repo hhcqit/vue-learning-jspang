@@ -2,87 +2,83 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>HelloWord</title>
-    <script type="text/javascript" src="../assets/js/vue.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>HelloWord</title>
+  <script type="text/javascript" src="../assets/js/vue.js"></script>
+  <script type="text/javascript" src="../assets/js/lodash.js"></script>
 </head>
 
 <body>
-    <h1>HelloWord</h1>
-    <hr>
-    <div id="app">
-            <span v-html="msgHtml"></span>
-        <span>{{ message }}</span>=<span v-text="message"></span><br/>
-        <div v-if="isLogin">你好：JSPang</div>
-        <div v-else>请登录后操作</div>
-        <ul>
-            <li v-for="item in sortItems">
-                {{item}}
-            </li>
-        </ul>
-        <div v-show="!isLogin">你好：JSPang</div>
-        <ul>
-            <li v-for="student in sortStudents">
-                {{student.name}} - {{student.age}}
-            </li>
-        </ul>
-    </div>
-    <script type="text/javascript">
-        function sortNumber(a, b) {
-            return a - b
-        }
+  <h1>HelloWord</h1>
+  <hr>
+  <div id="app">
+    <h3>v-html</h3>
+    <span v-html="msgHtml"></span>
+    <h3>v-text</h3>
+    <span>{{ message }}</span>=
+    <span v-text="message"></span>
+    <br/>
+    <h3>v-show</h3>
+    <div v-show="isLogin">你好：JSPang</div>
+    <h3>v-for</h3>
+    <ul>
+      <li v-for="student in sortStudents">
+        {{student.name}} - {{student.age}}
+      </li>
+    </ul>
 
-        function sortByKey(array, key) {
-            return array.sort(function (a, b) {
-                var x = a[key];
-                var y = b[key];
-                return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-            });
-        }
-        var app = new Vue({
-            el: "#app",
-            data: {
-                msgHtml:`<h2 style="background:yellow;">hello Vue!</h2>`,
-                message: "hello world",
-                isLogin: false,
-                items: [20, 23, 18, 65, 32, 19, 54, 56, 41, 5],
-                students: [{
-                        name: 'jspang',
-                        age: 32
-                    },
-                    {
-                        name: 'Panda',
-                        age: 30
-                    },
-                    {
-                        name: 'PanPaN',
-                        age: 21
-                    },
-                    {
-                        name: 'King',
-                        age: 45
-                    }
-                ]
-            },
-            computed: {
-                sortItems: function () {
-                    return this.items.sort(sortNumber).reverse();
-                },
-                sortStudents: function () {
-                    var _self = this;
-                    return sortByKey(_self.students,'age');
-                    // return _self.students.sort(function (a, b) {
-                    //     var x = a['age'];
-                    //     var y = b['age'];
-                    //     return ((x < y) ? -1 : ((x > y) ? 1 : 0));
-                    // });
+  </div>
+  <script type="text/javascript">
+    function sortByKey(array, key) {
+      return array.sort(function (a, b) {
+        var x = a[key];
+        var y = b[key];
+        return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+      });
+    }
+    var app = new Vue({
+      el: "#app",
+      data: {
+        html: '<strong>洪焕是帅哥</strong>',
+        msgHtml: `<h2 style="background:yellow;">hello Vue!</h2>`,
+        message: "hello world",
+        isLogin: false,
+        items: [20, 23, 18, 65, 32, 19, 54, 56, 41, 5],
+        students: [{
+            name: 'jspang',
+            age: 32
+          },
+          {
+            name: 'Panda',
+            age: 30
+          },
+          {
+            name: 'PanPaN',
+            age: 21
+          },
+          {
+            name: 'King',
+            age: 45
+          }
+        ]
+      },
+      computed: {
+        sortStudents: function () {
+          var _self = this;
+          // return sortByKey(_self.students,'age');
+          return _self.students.sort(function (a, b) {
+            var x = a['age'];
+            var y = b['age'];
+            return ((x < y) ? -1 : ((x > y) ? 1 : 0));
+          });
 
-                }
-            }
-        })
-    </script>
+        }
+      }
+    })
+    
+  </script>
 </body>
 
 </html>
