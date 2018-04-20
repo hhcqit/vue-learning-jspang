@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>slot</title>
+    <script type="text/javascript" src="../assets/js/vue.js"></script>
+</head>
+
+<body>
+    <h1>slot</h1>
+    <hr>
+    <div id="app">
+        <jspang>
+            <span slot="bolgUrl">{{jspangData.bolgUrl}}</span>
+        </jspang>
+    </div>
+    <template id="tmp">
+        <div>
+            <p>
+                博客地址：<slot name="bolgUrl"></slot>
+            </p>
+           
+        </div>
+    </template>
+    <script type="text/javascript">
+        var jspang = {
+            template:'#tmp'
+        }
+        var app = new Vue({
+            el: "#app",
+            data: {
+                jspangData: {
+                    bolgUrl: 'http://jspang.com'
+                }
+            },
+            computed: {},
+            components:{
+                "jspang":jspang
+            }
+        })
+    </script>
+</body>
+
+</html>
